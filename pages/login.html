@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Iniciar sesión</title>
+        <link href="../css/style.css" rel="stylesheet" />
+        <link href="../css/formularios.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Encabezado y navegación -->
+        <header>
+            <div class="logo"><a href="../index.html">Ferretería Los Maestros</a></div>
+        </header>
+        <!-- Contenido principal -->
+        <main>
+            <section class="formulario-container">
+                <h1>Iniciar sesión</h1>
+                <form id="form-login">
+                    <label>Correo electrónico</label>
+                    <input id="login-correo" maxlength="100" required="" type="email" />
+                    <label>Contraseña</label>
+                    <input id="login-password" maxlength="10" minlength="4" required="" type="password" />
+                    <p class="error" id="error-login"></p>
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+                <p>¿No tienes cuenta?<a href="registro.html">Regístrate</a></p>
+            </section>
+        </main>
+        <script src="../js/validaciones.js"></script>
+        <script src="../js/login.js"></script>
+    </body>
+</html>
