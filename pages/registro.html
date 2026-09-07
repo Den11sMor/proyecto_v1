@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Registro</title>
+        <link href="../css/style.css" rel="stylesheet" />
+        <link href="../css/formularios.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Encabezado y navegación -->
+        <header>
+            <div class="logo"><a href="../index.html">Ferretería Los Maestros</a></div>
+        </header>
+        <!-- Contenido principal -->
+        <main>
+            <section class="formulario-container">
+                <h1>Crear cuenta</h1>
+                <form id="form-registro">
+                    <label>RUN</label>
+                    <input id="run" maxlength="9" placeholder="19011022K" required="" />
+                    <label>Nombre</label>
+                    <input id="nombre" maxlength="50" required="" />
+                    <label>Apellidos</label>
+                    <input id="apellidos" maxlength="100" required="" />
+                    <label>Correo</label>
+                    <input id="correo" maxlength="100" required="" type="email" />
+                    <label>Contraseña</label>
+                    <input id="password" maxlength="10" minlength="4" required="" type="password" />
+                    <label>Región</label>
+                    <select id="region" onchange="cargarComunas()" required="">
+                        <option value="">Seleccione región</option>
+                    </select>
+                    <label>Comuna</label>
+                    <select id="comuna" required="">
+                        <option value="">Seleccione comuna</option>
+                    </select>
+                    <label>Dirección</label>
+                    <textarea id="direccion" maxlength="300" required=""></textarea>
+                    <button type="submit">Registrarme</button>
+                </form>
+            </section>
+        </main>
+        <script src="../js/validaciones.js"></script>
+        <script src="../js/regiones.js"></script>
+        <script src="../js/registro.js"></script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+/* Estilos principales de esta parte del proyecto. */
+
+.formulario-container {
+    max-width:650px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px
+}
+
+.formulario-container h1 {
+    text-align:center;
+    margin-bottom:25px
+}
+
+.formulario-container form {
+    display:flex;
+    flex-direction:column;
+    gap:10px
+}
+
+.formulario-container input,.formulario-container select,.formulario-container textarea {
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:16px
+}
+
+.formulario-container textarea {
+    min-height:120px;
+    resize:vertical
+}
+
+.formulario-container button {
+    margin-top:15px
+}
+
+.form-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px
+}
+
+.form-full {
+    grid-column:1/-1
+}
+
+@media(max-width:700px) {
+    .form-grid {
+        grid-template-columns:1fr
+    }
+
+}
