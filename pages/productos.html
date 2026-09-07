@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Productos</title>
+        <link href="../css/style.css" rel="stylesheet" />
+        <link href="../css/tienda.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Encabezado y navegación -->
+        <header>
+            <div class="logo"><a href="../index.html">Ferretería Los Maestros</a></div>
+            <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="blogs.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="carrito.html">Carrito<span id="contador-carrito">0</span></a>
+        </nav>
+        </header>
+        <!-- Contenido principal -->
+        <main>
+            <section class="titulo-pagina">
+                <h1>Nuestros productos</h1>
+                <p>Encuentra todo lo que necesitas para tus proyectos.</p>
+            </section>
+            <section class="buscador">
+                <input id="buscar-producto" oninput="buscarProductos()" placeholder="Buscar producto..." type="text" />
+            </section>
+            <section class="productos-grid" id="lista-productos"></section>
+        </main>
+        <!-- Pie de página -->
+        <footer>
+            <p>© 2026 Ferretería Los Maestros</p>
+        </footer>
+        <script src="../js/datos.js"></script>
+        <script src="../js/carrito.js"></script>
+        <script src="../js/productos.js"></script>
+        <script src="../js/app.js"></script>
+    </body>
+</html>

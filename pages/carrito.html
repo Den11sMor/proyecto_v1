@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Carrito</title>
+        <link href="../css/style.css" rel="stylesheet" />
+        <link href="../css/tienda.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Encabezado y navegación -->
+        <header>
+            <div class="logo"><a href="../index.html">Ferretería Los Maestros</a></div>
+            <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="carrito.html">Carrito<span id="contador-carrito">0</span></a>
+        </nav>
+        </header>
+        <!-- Contenido principal -->
+        <main>
+            <h1>Carrito de compras</h1>
+            <section id="lista-carrito"></section>
+            <section class="totales">
+                <p>Subtotal:<strong id="subtotal">$0</strong></p>
+                <p>IVA:<strong id="iva">$0</strong></p>
+                <p>Total:<strong id="total">$0</strong></p>
+                <button onclick="alert('Compra simulada correctamente.')">Comprar</button>
+            </section>
+        </main>
+        <script src="../js/datos.js"></script>
+        <script src="../js/carrito.js"></script>
+        <script src="../js/app.js"></script>
+    </body>
+</html>
