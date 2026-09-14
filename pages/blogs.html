@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Blog</title>
-        <link href="../css/style.css" rel="stylesheet" />
-        <link href="../css/tienda.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Encabezado y navegación -->
-        <header>
-            <div class="logo"><a href="../index.html">Ferretería Los Maestros</a></div>
-        </header>
-        <!-- Contenido principal -->
-        <main>
-            <h1>Blog</h1>
-            <section class="productos-grid" id="lista-blogs"></section>
-        </main>
-        <script src="../js/blog.js"></script>
-        <script src="../js/app.js"></script>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/tienda.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <a href="../index.html">
+                Ferretería Los Maestros
+            </a>
+        </div>
+
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="blogs.html">Blog</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="contacto.html">Contacto</a>
+
+            <a href="carrito.html">
+                Carrito
+                <span id="contador-carrito">0</span>
+            </a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <h1>Blog</h1>
+
+        <section
+            id="lista-blogs"
+            class="productos-grid">
+        </section>
+
+    </main>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/blog.js"></script>
+
+</body>
+
 </html>
