@@ -1,17 +1,33 @@
-// Funciones generales del sitio, como usuario actual y rutas de imágenes.
-
-function usuarioActual() {
-    return JSON.parse(localStorage.getItem("usuarioActual") || "null");
-}
-
-function cerrarSesion() {
-    localStorage.removeItem("usuarioActual");
-    window.location.href = "../index.html";
-}
+// Función para corregir las rutas de las imágenes
+// dependiendo de la carpeta donde se encuentra la página.
 
 function rutaImagen(ruta) {
-    if (window.location.pathname.includes("/pages/") || window.location.pathname.includes("/admin/")) {
+
+    if (!ruta) {
+        return "";
+    }
+
+    // Si la ruta ya comienza con ../,
+    // no se agrega nuevamente.
+    if (ruta.startsWith("../")) {
+        return ruta;
+    }
+
+    const rutaActual =
+        window.location.pathname;
+
+    // Las páginas dentro de pages necesitan
+    // subir una carpeta para llegar a img.
+    if (rutaActual.includes("/pages/")) {
         return "../" + ruta;
     }
-return ruta;
+
+    // Los archivos dentro de admin también
+    // necesitan subir una carpeta.
+    if (rutaActual.includes("/admin/")) {
+        return "../" + ruta;
+    }
+
+    // index.html está en la carpeta principal.
+    return ruta;
 }

@@ -1,37 +1,369 @@
-// Funciones para administrar los productos desde el panel.
+// Funciones para administrar los productos
+// desde el panel de administración.
 
 function renderAdminProductos() {
-    const c=document.getElementById("tabla-productos");if (!c)return;
-    const lista=obtenerProductos();
-    c.innerHTML=`<div class="table-wrap"><table><thead><tr><th>Código</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Stock crítico</th><th>Categoría</th><th>Acciones</th></tr></thead><tbody>${lista.map(p=>`<tr><td>${p.codigo}</td><td>${p.nombre}</td><td>$${p.precio.toLocaleString("es-CL")}</td><td>${p.stock}</td><td>${p.stockCritico}</td><td>${p.categoria}</td><td><button onclick="editarProducto('${p.codigo}')">Editar</button> <button onclick="eliminarProducto('${p.codigo}')">Eliminar</button></td></tr>`).join("")}</tbody></table></div>`
+
+    const contenedor =
+        document.getElementById("tabla-productos");
+
+    if (!contenedor) {
+        return;
+    }
+
+    const productos =
+        obtenerProductos();
+
+    if (productos.length === 0) {
+
+        contenedor.innerHTML =
+            "<p>No existen productos registrados.</p>";
+
+        return;
+    }
+
+    contenedor.innerHTML = `
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Stock crítico</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${productos.map(producto => `
+
+                        <tr>
+
+                            <td>
+                                ${producto.codigo}
+                            </td>
+
+                            <td>
+                                ${producto.nombre}
+                            </td>
+
+                            <td>
+                                $${producto.precio.toLocaleString("es-CL")}
+                            </td>
+
+                            <td>
+                                ${producto.stock}
+                            </td>
+
+                            <td>
+                                ${producto.stockCritico}
+                            </td>
+
+                            <td>
+                                ${producto.categoria}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    type="button"
+                                    onclick="
+                                        editarProducto(
+                                            '${producto.codigo}'
+                                        )
+                                    ">
+                                    Editar
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onclick="
+                                        eliminarProducto(
+                                            '${producto.codigo}'
+                                        )
+                                    ">
+                                    Eliminar
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `).join("")}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    `;
 }
 
+// Elimina un producto.
 function eliminarProducto(codigo) {
-    if (!confirm("¿Eliminar producto?"))return;
-    const lista=obtenerProductos().filter(p=>p.codigo!==codigo);guardarProductos(lista);location.reload()
+
+    const confirmar =
+        confirm(
+            "¿Quieres eliminar este producto?"
+        );
+
+    if (!confirmar) {
+        return;
+    }
+
+    const productos =
+        obtenerProductos().filter(
+            producto =>
+                producto.codigo !== codigo
+        );
+
+    guardarProductos(productos);
+
+    renderAdminProductos();
 }
 
-function editarProducto(codigo) {localStorage.setItem("productoEditar",codigo);location.href="producto-form.html"}
-const fp=document.getElementById("form-producto");
-if (fp)fp.addEventListener("submit",e=>{
-    e.preventDefault();
-    const codigo=document.getElementById("codigo").value.trim(),nombre=document.getElementById("nombre").value.trim(),descripcion=document.getElementById("descripcion").value.trim(),precio=Number(document.getElementById("precio").value),stock=Number(document.getElementById("stock").value),stockCritico=Number(document.getElementById("stockCritico").value),categoria=document.getElementById("categoria").value;
-    let lista=obtenerProductos(),editando=localStorage.getItem("productoEditar"),imagen="../img/productos/herramienta.svg";
-    if (!codigo||!nombre||precio<0||stock<0||stockCritico<0||!categoria) {alert("Completa correctamente el formulario.");return}
-    const existe=lista.findIndex(p=>p.codigo===codigo);
-    if (editando) {
-        const idx=lista.findIndex(p=>p.codigo===editando);
-        if (idx===-1)return;
-        lista[idx]={...lista[idx],codigo,nombre,descripcion,precio,stock,stockCritico,categoria};
-        localStorage.removeItem("productoEditar");
-    } else{
-    if (existe!==-1) {alert("El código ya existe.");return}
-    lista.push({codigo,nombre,descripcion,precio,stock,stockCritico,categoria,imagen});
+// Guarda el código del producto que se quiere editar.
+function editarProducto(codigo) {
+
+    localStorage.setItem(
+        "productoEditar",
+        codigo
+    );
+
+    location.href =
+        "producto-form.html";
 }
-guardarProductos(lista);alert("Producto guardado.");location.href="productos.html"
-})
-document.addEventListener("DOMContentLoaded",()=>{
-    const edit=localStorage.getItem("productoEditar");if (!edit)return;
-    const p=obtenerProductos().find(x=>x.codigo===edit);if (!p)return;
-    ["codigo","nombre","descripcion","precio","stock","stockCritico","categoria"].forEach(id=>{const e=document.getElementById(id);if (e)e.value=p[id]})
-})
+
+// Formulario para crear o editar productos.
+const formularioProducto =
+    document.getElementById(
+        "form-producto"
+    );
+
+if (formularioProducto) {
+
+    formularioProducto.addEventListener(
+        "submit",
+        event => {
+
+            event.preventDefault();
+
+            const codigo =
+                document
+                    .getElementById("codigo")
+                    .value
+                    .trim();
+
+            const nombre =
+                document
+                    .getElementById("nombre")
+                    .value
+                    .trim();
+
+            const descripcion =
+                document
+                    .getElementById("descripcion")
+                    .value
+                    .trim();
+
+            const precio =
+                Number(
+                    document
+                        .getElementById("precio")
+                        .value
+                );
+
+            const stock =
+                Number(
+                    document
+                        .getElementById("stock")
+                        .value
+                );
+
+            const stockCritico =
+                Number(
+                    document
+                        .getElementById("stockCritico")
+                        .value
+                );
+
+            const categoria =
+                document
+                    .getElementById("categoria")
+                    .value
+                    .trim();
+
+            if (
+                !codigo ||
+                !nombre ||
+                !descripcion ||
+                !categoria ||
+                precio < 0 ||
+                stock < 0 ||
+                stockCritico < 0
+            ) {
+
+                alert(
+                    "Completa correctamente todos los campos."
+                );
+
+                return;
+            }
+
+            let productos =
+                obtenerProductos();
+
+            const productoEditar =
+                localStorage.getItem(
+                    "productoEditar"
+                );
+
+            // Si existe un producto para editar,
+            // actualizamos sus datos.
+            if (productoEditar) {
+
+                const indice =
+                    productos.findIndex(
+                        producto =>
+                            producto.codigo ===
+                            productoEditar
+                    );
+
+                if (indice === -1) {
+
+                    alert(
+                        "No se encontró el producto."
+                    );
+
+                    return;
+                }
+
+                productos[indice] = {
+
+                    ...productos[indice],
+
+                    codigo: codigo,
+                    nombre: nombre,
+                    descripcion: descripcion,
+                    precio: precio,
+                    stock: stock,
+                    stockCritico: stockCritico,
+                    categoria: categoria
+
+                };
+
+                localStorage.removeItem(
+                    "productoEditar"
+                );
+
+            } else {
+
+                // Evita códigos repetidos.
+                const existe =
+                    productos.some(
+                        producto =>
+                            producto.codigo ===
+                            codigo
+                    );
+
+                if (existe) {
+
+                    alert(
+                        "El código del producto ya existe."
+                    );
+
+                    return;
+                }
+
+                productos.push({
+
+                    codigo: codigo,
+                    nombre: nombre,
+                    descripcion: descripcion,
+                    precio: precio,
+                    stock: stock,
+                    stockCritico: stockCritico,
+                    categoria: categoria,
+
+                    // Imagen que existe actualmente
+                    // dentro del proyecto.
+                    imagen:
+                        "img/productos/martillo_img.jpg"
+
+                });
+            }
+
+            guardarProductos(productos);
+
+            alert(
+                "Producto guardado correctamente."
+            );
+
+            location.href =
+                "productos.html";
+        }
+    );
+}
+
+// Carga los datos del producto cuando se está editando.
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        renderAdminProductos();
+
+        const codigoEditar =
+            localStorage.getItem(
+                "productoEditar"
+            );
+
+        if (!codigoEditar) {
+            return;
+        }
+
+        const producto =
+            obtenerProductos().find(
+                elemento =>
+                    elemento.codigo ===
+                    codigoEditar
+            );
+
+        if (!producto) {
+            return;
+        }
+
+        const campos = [
+            "codigo",
+            "nombre",
+            "descripcion",
+            "precio",
+            "stock",
+            "stockCritico",
+            "categoria"
+        ];
+
+        campos.forEach(campo => {
+
+            const elemento =
+                document.getElementById(
+                    campo
+                );
+
+            if (elemento) {
+
+                elemento.value =
+                    producto[campo];
+            }
+        });
+    }
+);
